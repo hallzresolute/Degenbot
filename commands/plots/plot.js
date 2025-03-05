@@ -17,15 +17,22 @@ module.exports = {
 				tags = '';
 			search = 'https://danbooru.donmai.us/posts/random.json?login='+danbooruUser+'&api_key='+danbooruToken+'&tags=rating%3Aexplicit+-guro+-scat+-loli+-pee+-shota+-bestiality+-rape'+tags;
 			console.log(search);
-			post = await fetch(search)
-			.then(response => {
-				if (!response.ok) {
-					error_count++;
-					throw new Error('Network response was not ok');
-				}
-				return response.json();
-			})
-			.catch(error => console.error('Fetch error:', 'UNABLE TO FIND PLOT'));
+			
+			try {
+				//make call to API
+				post = await fetch(search)
+				.then(response => {
+					if (!response.ok) {
+						error_count++;
+						throw new Error('Network response was not ok');
+					}
+					return response.json();
+				})
+				.catch(error => console.error('Fetch error:', 'UNABLE TO FIND PLOT'));
+			} catch(error) {
+				console.log('Fetch error: ' + error);
+				error_count === 3;
+			}
 			parit_count++;
 			if (error_count === 3) {
 				await interaction.reply('I couldn\'t find any plots, sorry :(');
