@@ -4,7 +4,7 @@
   "description": "DegenBot: A Discord bot for degenerates",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "npm list discord.js"
   },
   "author": "Nathan Stewart",
   "license": "GPL",
